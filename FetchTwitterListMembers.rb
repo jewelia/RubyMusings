@@ -6,7 +6,7 @@ require 'twitter'
 #I loosely based this on http://stackoverflow.com/questions/8297036/get-more-than-20-members-of-a-list-with-ruby-twitter-gem
 #but found the code in that solution was inadequate.
 
-listmembers = Twitter.list_members('SnapKnot','wedding-planners')
+listmembers = Twitter.list_members(TWITTER_USERNAME,LIST_NAME)
 #List has < 20 members
 if (listmembers.next_cursor == 0)
   listmembers.users.each do |lmname|
@@ -25,7 +25,7 @@ else
     end
    end
   pagevalue = listmembers.next_cursor
-  listmembers = Twitter.list_members('SnapKnot', 'wedding-planners', :cursor => pagevalue)
+  listmembers = Twitter.list_members(TWITTER_USERNAME, LIST_NAME, :cursor => pagevalue)
   if (listmembers.next_cursor == 0)
     listmembers.users.each do |lmname|
      #nil check
